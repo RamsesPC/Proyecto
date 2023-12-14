@@ -1,9 +1,9 @@
-const ObrasModel = require('../models/obras');
+const UsuarioModel = require('../models/usuario');
 
-class ObrasController
+class UsuarioController
 {
     static async indexGet(req, res) {
-        let data = await ObrasModel.consultar();
+        let data = await UsuarioModel.consultar();
         res.send(data);
     }
 
@@ -11,10 +11,10 @@ class ObrasController
         try {
             const newData = req.body;
 
-            const insertedId = await ObrasModel.insertar(newData);
+            const insertedId = await UsuarioModel.insertar(newData);
 
             res.status(201)
-                .header('Location', `/obras/${insertedId}`)
+                .header('Location', `/usuario/${insertedId}`)
                 .send({status: 201, message: 'Created'});
         } catch (error) {
             console.error(error);
@@ -24,7 +24,7 @@ class ObrasController
 
     static async itemGet(req, res) {
         let id = req.params.id;
-        let data = await ObrasModel.consultarPorId(id);
+        let data = await UsuarioModel.consultarPorId(id);
         if (data.length == 0) {
             res.status(404).send({errno: 404, error: 'Not found'});
             return;
@@ -37,7 +37,7 @@ class ObrasController
             const id = req.params.id;
             const updatedData = req.body;
 
-            const result = await ObrasModel.reemplazar(id, updatedData);
+            const result = await UsuarioModel.reemplazar(id, updatedData);
 
             if (result === 0) {
                 res.status(404).send({ errno: 404, error: 'Not found' });
@@ -55,7 +55,7 @@ class ObrasController
             const id = req.params.id;
             const updatedFields = req.body;
 
-            const result = await ObrasModel.actualizar(id, updatedFields);
+            const result = await UsuarioModel.actualizar(id, updatedFields);
 
             if (result === 0) {
                 res.status(404).send({ errno: 404, error: 'Not found' });
@@ -72,7 +72,7 @@ static async itemDelete(req, res) {
     try {
         const id = req.params.id;
 
-        const result = await ObrasModel.eliminar(id);
+        const result = await UsuarioModel.eliminar(id);
 
         if (result === 0) {
             res.status(404).send({ errno: 404, error: 'Not found' });
@@ -87,4 +87,4 @@ static async itemDelete(req, res) {
 
 }
 
-module.exports = ObrasController;
+module.exports = UsuarioController;

@@ -1,41 +1,41 @@
 const { connectMysql } = require('../dbconnection');
-class ObrasModel
+class ArtistaModel
 {
     static async consultar() {
         let db = await connectMysql();
-        let query = db('obra');
+        let query = db('artista');
         return await query;
     }
 
     static async consultarPorId(id) {
         let db = await connectMysql();
-        return await db('obra').where('id_obra', id);
+        return await db('artista').where('id_artista', id);
     }
 
     static async insertar(datos) {
         let db = await connectMysql();
-        const result = await db('obra').insert(datos).returning('id_obra');
+        const result = await db('artista').insert(datos).returning('id_artista');
         return result[0];
     }
 
     static async actualizar(id, campos) {
         let db = await connectMysql();
-        return await db('obra').where('id_obra', id).update(campos);
+        return await db('artista').where('id_artista', id).update(campos);
     }
 
     static async reemplazar(id, newData) {
         let db = await connectMysql();
-        newData['id_obra'] = id;
-        await db('obra').where('id_obra', id).del();
-        await db.insert(newData).into('obra');
+        newData['id_artista'] = id;
+        await db('artista').where('id_artista', id).del();
+        await db.insert(newData).into('artista');
         return id;
     }
 
     static async eliminar(id) {
         let db = await connectMysql();
-        return await db('obra').where('id_obra', id).del();
+        return await db('artista').where('id_artista', id).del();
     }
 }
 
 
-module.exports = ObrasModel;
+module.exports = ArtistaModel;
