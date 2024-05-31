@@ -6,6 +6,9 @@ const ArtistaController = require('./controllers/ArtistaController');
 const CompradorController = require('./controllers/CompradorController');
 const TransController = require('./controllers/TransController');
 const UsuarioController = require('./controllers/UsuarioController');
+const cors = require('cors');
+
+app.use(cors()); 
 
 app.use(express.json());
 
