@@ -1,20 +1,23 @@
-# Utilizar imagen base de Node.js
-FROM node:lts-slim
+# Usar una imagen base de Node.js
+FROM node:14-alpine
 
-# Crear y cambiar el directorio actual a /app
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copiar archivo de dependencias
-COPY ./package*.json /app/
+# Copiar el archivo package.json y el package-lock.json
+COPY package*.json ./
 
-# Instalar las dependencias
+# Instalar las dependencias del proyecto
 RUN npm install
 
-# Copiamos el contenido del proyecto a /app
-COPY . /app/
+# Copiar el resto de la aplicación al directorio de trabajo
+COPY . .
 
-# Exponer puerto 80
-EXPOSE 80
+# Construir la aplicación para producción
+RUN npm run build
 
-# Iniciar aplicación
-CMD ["npm", "start"]
+# Exponer el puerto que usará la aplicación
+EXPOSE 3100
+
+# Definir el comando por defecto para ejecutar la aplicación
+CMD ["npm", "run", "debug"]
