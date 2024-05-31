@@ -1,7 +1,7 @@
 # Utilizar imagen base de Node.js
 FROM node:lts-slim
 
-# Crear y cambiar el directorio actual a /app
+# Crearr y cambiar el directorio actual a /app
 WORKDIR /app
 
 # Copiar archivo de dependencias
