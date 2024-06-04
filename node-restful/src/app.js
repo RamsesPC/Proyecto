@@ -11,6 +11,7 @@ const cors = require('cors');
 app.use(cors()); 
 
 app.use(express.json());
+const port = 3100;
 
 app.get('/', function (req, res) {
     res.statusCode = 200;
@@ -57,3 +58,7 @@ app.delete('/usuario/:id([0-9]+)', UsuarioController.itemDelete);
 app.listen(puerto, function() {
     console.log("Servidor en espera http://localhost");
 });
+
+app.listen(port, '0.0.0.0', () => {
+    console.log('Servidor ejecutándose en el puerto ${port}');
+  });
